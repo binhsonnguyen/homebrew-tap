@@ -5,55 +5,71 @@
 class C3 < Formula
   desc "Personal Claude Code session manager — CLI + web GUI"
   homepage "https://github.com/binhsonnguyen/ccc"
-  version "0.1.1"
+  version "0.1.2"
   license "MIT"
 
   depends_on "fzf"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.1/ccc_0.1.1_darwin_amd64.tar.gz"
-      sha256 "d51517f3d12c22063a815602f011c4b02e4de41f35837bc4b2ca7e1e6ad1954b"
+      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.2/ccc_0.1.2_darwin_amd64.tar.gz"
+      sha256 "d022e6713b46362d1a8ed0199c1bf99742d868249687c73894ce30c183965705"
 
       define_method(:install) do
         bin.install "c3-bin"
         bin.install "c3-server"
         (etc/"c3").install "shell/c3.sh"
-        fish_function_path.install "shell/c3.fish"
+        # share/fish/vendor_functions.d resolves to fish's auto-load
+        # path under HOMEBREW_PREFIX. fish_function_path DSL is not in
+        # scope inside the per-arch define_method(:install) blocks
+        # goreleaser generates, so we hand-roll the path.
+        (share/"fish/vendor_functions.d").install "shell/c3.fish"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.1/ccc_0.1.1_darwin_arm64.tar.gz"
-      sha256 "9c7627316c46400d4cd930c2ef8c3a27b669d6549a6bd13b07e37f2e481bfd97"
+      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.2/ccc_0.1.2_darwin_arm64.tar.gz"
+      sha256 "99e245def749c92f84dac0b8b96185219df21084b7ee7152da02309cabad6335"
 
       define_method(:install) do
         bin.install "c3-bin"
         bin.install "c3-server"
         (etc/"c3").install "shell/c3.sh"
-        fish_function_path.install "shell/c3.fish"
+        # share/fish/vendor_functions.d resolves to fish's auto-load
+        # path under HOMEBREW_PREFIX. fish_function_path DSL is not in
+        # scope inside the per-arch define_method(:install) blocks
+        # goreleaser generates, so we hand-roll the path.
+        (share/"fish/vendor_functions.d").install "shell/c3.fish"
       end
     end
   end
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.1/ccc_0.1.1_linux_amd64.tar.gz"
-      sha256 "48cd3c28bbc4f6f15c15e21330b67e6fa590cbcf8c87bfe4a92ca531901f41e7"
+      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.2/ccc_0.1.2_linux_amd64.tar.gz"
+      sha256 "5bf5359accc3751e4a7983589285a58a131fdca655d5d5a9b000ed1e17c6c663"
       define_method(:install) do
         bin.install "c3-bin"
         bin.install "c3-server"
         (etc/"c3").install "shell/c3.sh"
-        fish_function_path.install "shell/c3.fish"
+        # share/fish/vendor_functions.d resolves to fish's auto-load
+        # path under HOMEBREW_PREFIX. fish_function_path DSL is not in
+        # scope inside the per-arch define_method(:install) blocks
+        # goreleaser generates, so we hand-roll the path.
+        (share/"fish/vendor_functions.d").install "shell/c3.fish"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.1/ccc_0.1.1_linux_arm64.tar.gz"
-      sha256 "41cd4368a38f27a99c3b52147ce0a1093c8b796078a816b255ac067f2627a19f"
+      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.2/ccc_0.1.2_linux_arm64.tar.gz"
+      sha256 "e28ad6dfb47f5839d87f6e6ad3813c022274ec08636a760538780fccad263e90"
       define_method(:install) do
         bin.install "c3-bin"
         bin.install "c3-server"
         (etc/"c3").install "shell/c3.sh"
-        fish_function_path.install "shell/c3.fish"
+        # share/fish/vendor_functions.d resolves to fish's auto-load
+        # path under HOMEBREW_PREFIX. fish_function_path DSL is not in
+        # scope inside the per-arch define_method(:install) blocks
+        # goreleaser generates, so we hand-roll the path.
+        (share/"fish/vendor_functions.d").install "shell/c3.fish"
       end
     end
   end
