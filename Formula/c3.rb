@@ -5,15 +5,15 @@
 class C3 < Formula
   desc "Personal Claude Code session manager — CLI + web GUI"
   homepage "https://github.com/binhsonnguyen/ccc"
-  version "0.1.2"
+  version "0.1.3"
   license "MIT"
 
   depends_on "fzf"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.2/ccc_0.1.2_darwin_amd64.tar.gz"
-      sha256 "d022e6713b46362d1a8ed0199c1bf99742d868249687c73894ce30c183965705"
+      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.3/ccc_0.1.3_darwin_amd64.tar.gz"
+      sha256 "54ce32f9673d05f2515a35bec0eee6197cb4500f8b9e6c81db6ff11cd9f4bb09"
 
       define_method(:install) do
         bin.install "c3-bin"
@@ -27,8 +27,8 @@ class C3 < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.2/ccc_0.1.2_darwin_arm64.tar.gz"
-      sha256 "99e245def749c92f84dac0b8b96185219df21084b7ee7152da02309cabad6335"
+      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.3/ccc_0.1.3_darwin_arm64.tar.gz"
+      sha256 "7c2ed9689b2e3f515c2b0ad6c69f030f7f0b8032785f22cdaff20e16e42b1116"
 
       define_method(:install) do
         bin.install "c3-bin"
@@ -45,8 +45,8 @@ class C3 < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.2/ccc_0.1.2_linux_amd64.tar.gz"
-      sha256 "5bf5359accc3751e4a7983589285a58a131fdca655d5d5a9b000ed1e17c6c663"
+      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.3/ccc_0.1.3_linux_amd64.tar.gz"
+      sha256 "c738632aa4c56c4469c74d8ed636da5a7517f5132cb17cb34d8fd1ce90579bbb"
       define_method(:install) do
         bin.install "c3-bin"
         bin.install "c3-server"
@@ -59,8 +59,8 @@ class C3 < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.2/ccc_0.1.2_linux_arm64.tar.gz"
-      sha256 "e28ad6dfb47f5839d87f6e6ad3813c022274ec08636a760538780fccad263e90"
+      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.1.3/ccc_0.1.3_linux_arm64.tar.gz"
+      sha256 "508e6ed608560cd8b691784059db9542fe23bc1242c2bef1350dee4ddca1ee68"
       define_method(:install) do
         bin.install "c3-bin"
         bin.install "c3-server"
@@ -84,7 +84,24 @@ class C3 < Formula
 
       The GUI server listens on 127.0.0.1:7755 by default. Override
       with C3_SERVER_PORT=N (or =0 for a random port).
+
+      Optional: run c3-server in the background via brew services so
+      `c3 gui` opens the browser instantly without spawning anything:
+
+        brew services start c3
+
+      (Service mode disables the idle auto-shutdown.)
     EOS
+  end
+
+  service do
+    run [opt_bin/"c3-server"]
+    keep_alive true
+    log_path var/"log/c3-server.log"
+    error_log_path var/"log/c3-server.log"
+    # Idle shutdown makes sense when c3 gui spawns the server on
+    # demand, but defeats the point of running as a service.
+    environment_variables C3_SERVER_IDLE_MINUTES: "0"
   end
 
   test do
