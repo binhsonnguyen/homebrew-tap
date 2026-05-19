@@ -5,15 +5,15 @@
 class C3 < Formula
   desc "Personal Claude Code session manager — CLI + web GUI"
   homepage "https://github.com/binhsonnguyen/ccc"
-  version "0.2.6"
+  version "0.2.7"
   license "MIT"
 
   depends_on "fzf"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.2.6/ccc_0.2.6_darwin_amd64.tar.gz"
-      sha256 "2962fb587f00518080d2ae1a1c1f9f7f22a6db4b5d0f2e162027799715f63b44"
+      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.2.7/ccc_0.2.7_darwin_amd64.tar.gz"
+      sha256 "976a9c01f3a48cc9609d2239e04a00c92ce9566db0fb5358d33d892cfb0ee6d7"
 
       define_method(:install) do
         bin.install "c3-bin"
@@ -27,8 +27,8 @@ class C3 < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.2.6/ccc_0.2.6_darwin_arm64.tar.gz"
-      sha256 "f38519b9f1b42b8a3a092ff536a1efd3dde1f9fb23d5b23e92c5c1e1ac691980"
+      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.2.7/ccc_0.2.7_darwin_arm64.tar.gz"
+      sha256 "241b7fc628b270535eccb5de15bb6dd1347021e60a57af0eb4c09f013f56ba10"
 
       define_method(:install) do
         bin.install "c3-bin"
@@ -45,8 +45,8 @@ class C3 < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.2.6/ccc_0.2.6_linux_amd64.tar.gz"
-      sha256 "4b7a9f932982e9fc82c002dd16a9908ce90444d882ce36d0f67a327fdfc8f8db"
+      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.2.7/ccc_0.2.7_linux_amd64.tar.gz"
+      sha256 "1a7f9e77bda6c83f8f3d8a8eaf77dcb7a1608b0fa474e4ab0d9ea9956bc5157d"
       define_method(:install) do
         bin.install "c3-bin"
         bin.install "c3-server"
@@ -59,8 +59,8 @@ class C3 < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.2.6/ccc_0.2.6_linux_arm64.tar.gz"
-      sha256 "76f06459b7db77091dc4c70dc70ff460030d2c32557bbf471baa88a10feb51f5"
+      url "https://github.com/binhsonnguyen/ccc/releases/download/v0.2.7/ccc_0.2.7_linux_arm64.tar.gz"
+      sha256 "3268d986000e43e76fc2709962894ff541063d7b4b4bc51cd04ff16242643362"
       define_method(:install) do
         bin.install "c3-bin"
         bin.install "c3-server"
